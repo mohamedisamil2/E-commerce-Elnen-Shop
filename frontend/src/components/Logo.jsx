@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 function Logo() {
   return (
-    <div>
+    <div className="shrink-0">
       <Link
         to="/"
-        className="text-xl md:text-2xl font-semibold bg-linear-to-r from-green-500 via-green-900 to-green-300 rounded-bl-full rounded-tr-full px-4 py-2"
+        className="inline-block whitespace-nowrap rounded-bl-full rounded-tr-full bg-linear-to-r from-green-600 to-green-800 px-5 py-2 text-xl font-semibold text-white"
       >
         El Nene Shop
       </Link>
@@ -13,4 +13,4 @@ function Logo() {
   );
 }
 
-export default Logo
+export default Logo;

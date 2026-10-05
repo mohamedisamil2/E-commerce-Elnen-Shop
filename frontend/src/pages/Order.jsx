@@ -8,6 +8,8 @@ function Order() {
   useEffect(() => {
     showMyOrder();
   }, [showMyOrder]);
+  
+  const myorder = order;
 
   console.log(order);
 
@@ -17,7 +19,7 @@ function Order() {
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-8">My Orders</h1>
 
-      {order.map((item) => (
+      {myorder.map((item) => (
         <div key={item._id} className="card bg-base-100 shadow mb-5 p-5">
           <h2>Order #{item._id}</h2>
 

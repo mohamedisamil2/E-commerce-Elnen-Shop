@@ -1,28 +1,37 @@
 import { Search } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SearchField() {
-    const { keyword, setKeyword } = useState("")
-    
-    function handleSearch() {
-        Navigation("/")
-    }
+  const [keyword, setKeyword] = useState("");
+  const navigate = useNavigate();
 
-    return (
-    <div className="hidden md:hidden xl:flex justify-between items-center focus:ring-2 focus:ring-green-500 min-w-md rounded-lg border border-green-300 ">
+  function handleSearch(e) {
+    e.preventDefault(); // يمنع ريفريش الصفحة
+    navigate(`/?search=${encodeURIComponent(keyword.trim())}`);
+  }
+
+  return (
+    <form
+      onSubmit={handleSearch}
+      className="hidden xl:flex w-full max-w-md items-center overflow-hidden rounded-lg border border-green-300 focus-within:ring-2 focus-within:ring-green-500"
+    >
       <input
         type="text"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
         placeholder="Search products..."
-        className="w-3/4 outline-none px-2 text-xl"
+        className="min-w-0 flex-1 bg-transparent px-3 py-2 text-base outline-none"
       />
-      <Search
-        className="bg-green-400 w-8 h-8 rounded-md"
-        onClick={handleSearch}
-      />
-    </div>
+      <button
+        type="submit"
+        aria-label="Search"
+        className="bg-green-600 px-3 py-3 text-white hover:bg-green-700 transition-colors"
+      >
+        <Search size={18} />
+      </button>
+    </form>
   );
 }
 
-export default SearchField
+export default SearchField;

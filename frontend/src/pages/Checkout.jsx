@@ -4,6 +4,7 @@ import { shippingAddressSchema } from "../schema/shippingAddress";
 import OrderSummary from "../components/OrderSummary";
 import InputField from "../components/InputField";
 import { orderStore } from "../stores/orderStore";
+import { useNavigate } from "react-router-dom";
 
 function Checkout() {
   const { createOrdercash, createStripeCheckout } = orderStore();
@@ -22,6 +23,8 @@ function Checkout() {
 
   const paymentMethod = watch("paymentMethod");
 
+  const navigate =useNavigate()
+
   const onSubmit = async (data) => {
     console.log(data);
 
@@ -34,9 +37,10 @@ function Checkout() {
     };
 
     if (data.paymentMethod === "cash") {
-      await createOrdercash({
+      const success= await createOrdercash({
         shippingAddress,
       });
+       if (success) navigate("/order");
     } else {
       console.log("Online");
       const res = await createStripeCheckout({

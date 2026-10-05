@@ -22,8 +22,13 @@ function Login() {
     await login(data);
   };
 
+  const inputClass =
+    "w-full rounded-xl border border-green-600 bg-white py-3 pl-10 pr-10 " +
+    "text-slate-900 placeholder-slate-400 outline-none " +
+    "focus:ring-2 focus:ring-green-500 focus:border-green-500";
+
   return (
-    <div className="w-full flex justify-center items-center p-4  ">
+    <div className="w-full flex justify-center items-center p-4 mt-20 ">
       <div className="relative w-full max-w-5xl h-162.5 md:h-200 ">
         {/* form and overview */}
 
@@ -33,7 +38,7 @@ function Login() {
           <div className="w-full max-w-md">
             {/* heading */}
             <div className="text-center mb-8">
-              <h2 className="text-4xl font-bold text-slate-300 mb-2">Login</h2>
+              <h2 className="text-4xl font-bold text-green-300 mb-2">Login</h2>
               <p className="text-slate-400">Sign In to access your Account </p>
             </div>
             {/* form */}
@@ -50,7 +55,7 @@ function Login() {
                     type="email"
                     {...register("email")}
                     placeholder="Email"
-                    className="w-full rounded-xl border border-slate-700 bg-slate-900 py-3 pl-10 pr-4 text-white"
+                    className={inputClass}
                   />
                 </div>
                 {errors.email && (
@@ -65,14 +70,14 @@ function Login() {
                 <div className="relative">
                   <Lock
                     size={18}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-green-400"
                   />
 
                   <input
-                    type={showPassword ? "text" : " password"}
+                    type={showPassword ? "text" : "password"}
                     {...register("password")}
                     placeholder="Password"
-                    className="w-full rounded-xl border border-slate-700 bg-slate-900 py-3 pl-10 pr-4 text-white"
+                    className={inputClass}
                   />
                   <button
                     type="button"
@@ -92,8 +97,8 @@ function Login() {
               <button
                 type="submit"
                 disabled={isSignIn}
-                className="w-full bg-cyan-500 text-slate-200 py-2.5 font-medium rounded-lg
-                   hover:bg-cyan-600 focus:ring-2 focus:ring-cyan-500"
+                className="w-full bg-green-500 text-slate-200 py-2.5 font-medium rounded-lg
+                   hover:bg-green-600 focus:ring-2 focus:ring-green-500"
               >
                 {isSignIn ? (
                   <LoaderIcon className="w-full h-6 animate-spin text-center" />
