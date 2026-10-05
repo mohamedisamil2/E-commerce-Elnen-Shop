@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import { userStore } from "../stores/userStore";
-import { LogIn, LogOut } from "lucide-react";
+import { LogIn,  UserPlus } from "lucide-react";
 import User from "./User";
 import Admin from "./Admin";
 import MenuDesktop from "./MenuDesktop";
@@ -15,41 +15,40 @@ function Navbar() {
   // const { isCartOpen } = cartStore();
   // console.log(isCartOpen);
   const isAdmin = auth?.role === "admin";
+
   return (
-    <header
-      className={`fixed top-0 z-50 min-w-full bg-white shadow-sm ${auth?.role === "admin" ? "m-0" : "mb-12"} `}
-    >
-      <nav className="container mx-auto flex items-center justify-between gap-8 h-16 ">
+    <header className="fixed top-0 z-50 min-w-full bg-white/80 backdrop-blur shadow-sm">
+      <nav className="container mx-auto flex items-center justify-between gap-8 h-16 px-4">
         {/* Logo */}
         <Logo />
 
         {/* Search */}
-        {auth?.role !== "admin" && <SearchField />}
+        {!isAdmin && <SearchField />}
 
         {/* desktop Menu */}
-        {auth?.role !== "admin" && <MenuDesktop />}
+        {!isAdmin && <MenuDesktop />}
 
         {/* Cart */}
-        {auth?.role !== "admin" && <CartLogo />}
+        {!isAdmin && <CartLogo />}
 
         {/* Mobile Menu */}
         <MenuMobile />
 
         {!auth ? (
-          <div className="hidden md:flex items-center gap-4 ">
+          <div className="hidden md:flex shrink-0 items-center gap-4">
             <Link
               to="/login"
-              className="flex items-center text-xl font-medium text-green-700 hover:text-green-500 transition-colors gap-2"
+              className="flex items-center gap-2 whitespace-nowrap text-base font-medium text-green-700 hover:text-green-500 transition-colors"
             >
-              <h3 className="">Sign In</h3>
-              <LogIn className="" />
+              <span>Sign In</span>
+              <LogIn size={18} />
             </Link>
             <Link
               to="/register"
-              className="flex items-center text-xl font-medium text-green-700 hover:text-green-500 transition-colors gap-2 "
+              className="flex items-center gap-2 whitespace-nowrap rounded-lg bg-green-600 px-4 py-2 text-base font-medium text-white hover:bg-green-700 transition-colors"
             >
-              <h3 className="">Sing Up</h3>
-              <LogOut />
+              <span>Sign Up</span>
+              <UserPlus size={18} />
             </Link>
           </div>
         ) : (

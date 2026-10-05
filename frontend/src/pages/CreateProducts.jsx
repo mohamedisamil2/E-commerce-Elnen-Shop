@@ -136,7 +136,7 @@ function CreateProducts() {
             )} */}
           </div>
 
-          <div className="flex justify-between ">
+          <div className="flex gap-2 ">
             <button className="btn btn-error w-2/5">Cancel</button>
             <button
               className="w-full bg-linear-to-r from-green-500 via-green-900 to-green-300  text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2"

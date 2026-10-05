@@ -1,9 +1,11 @@
 import { create } from "zustand";
 import { api } from "../lib/axios";
 import toast from "react-hot-toast";
+import { cartStore } from "./cartStore";
 
 export const orderStore = create((set, get) => ({
   order: [],
+  currentOrder: null, // طلب واحد بعد الدفع
   isCashPaymentLoading: false,
   isCheckoutLoading: false,
   isCheckoutSuccessLoading: false,
@@ -14,10 +16,13 @@ export const orderStore = create((set, get) => ({
     set({ isCashPaymentLoading: true });
     try {
       const res = await api.post("/order/cash", { shippingAddress });
-      set({ order: res.data });
+      set({ currentOrder: res.data });
+      cartStore.getState().getCart(); // ← جديد
       toast.success("Payment Cash By Successfully");
+      return true;
     } catch (err) {
       showError(err);
+      return true;
     } finally {
       set({ isCashPaymentLoading: false });
     }
@@ -38,11 +43,14 @@ export const orderStore = create((set, get) => ({
   confirmStripePayment: async (sessionId) => {
     set({ isCheckoutSuccessLoading: true });
     try {
-      const res = await api.post("/order/checkout-success ", { sessionId });
-      set({ order: res.data });
+      const res = await api.post("/order/checkout-success", { sessionId });
+      set({ currentOrder: res.data.order });
+      cartStore.getState().getCart(); // ← جديد
       toast.success("Payment Done Successfully");
+      return true;
     } catch (err) {
       showError(err);
+       return false;
     } finally {
       set({ isCheckoutSuccessLoading: true });
     }
